@@ -1,0 +1,17 @@
+{
+  "name": "aisweb-brasil",
+  "version": "0.4.1",
+  "description": "A module for fetching data from AisWeb",
+  "main": "dist/index.js",
+  "repository": "https://github.com/jpedroh/aisweb-brasil",
+  "author": "Joao Pedro Henrique",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "@types/request": "^2.47.1",
+    "@types/xml2js": "^0.4.3"
+  }
+}
