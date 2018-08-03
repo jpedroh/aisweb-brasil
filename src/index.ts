@@ -1,34 +1,29 @@
-import { AipSuplement, Chart, Meteorology, Notam } from './builders';
-import { AipSuplementProcessor, ChartProcessor, MeteorologyProcessor, NotamProcessor } from './processors';
-import AisConfig from './utils/config';
-import { ApiAreas } from './utils/enums';
-import RequestHandler from './utils/request';
+import { IAisConfig } from './common/config'
+import { AipSuplement, Chart, Meteorology, Notam } from './factories'
+import { AipSuplementRequest, ChartRequest, MeteorologyRequest, NotamRequest } from './requests'
 
 export default class Ais {
-  private config: AisConfig
 
-  constructor({ apiKey, apiPass }: { apiKey: string, apiPass: string }) {
-    this.config = new AisConfig({ apiKey, apiPass })
+  constructor(private config: IAisConfig) {}
+
+  public getCharts(...airports: string[]): Promise<Chart[][]> {
+    const requestHandler = new ChartRequest(this.config)
+    return Promise.all(airports.map((airport: string) => requestHandler.performRequest(airport)))
   }
 
-  public getCharts(...airports: Array<string>): Promise<Array<Array<Chart>>> {
-    const requestHandler = new RequestHandler(this.config, ApiAreas.charts);
-    return Promise.all(airports.map(airport => requestHandler.performRequest(airport, new ChartProcessor())));
+  public getNotams(...airports: string[]): Promise<Notam[][]> {
+    const requestHandler = new NotamRequest(this.config)
+    return Promise.all(airports.map((airport: string) => requestHandler.performRequest(airport)))
   }
 
-  public getNotams(...airports: Array<string>): Promise<Array<Array<Notam>>> {
-    const requestHandler = new RequestHandler(this.config, ApiAreas.notams);
-    return Promise.all(airports.map(airport => requestHandler.performRequest(airport, new NotamProcessor())));
+  public getAipSuplements(...airports: string[]): Promise<AipSuplement[][]> {
+    const requestHandler = new AipSuplementRequest(this.config)
+    return Promise.all(airports.map((airport: string) => requestHandler.performRequest(airport)))
   }
 
-  public getAipSuplements(...airports: Array<string>): Promise<Array<Array<AipSuplement>>> {
-    const requestHandler = new RequestHandler(this.config, ApiAreas.aip);
-    return Promise.all(airports.map(airport => requestHandler.performRequest(airport, new AipSuplementProcessor())));
-  }
-
-  public getMeteorology(...airports: Array<string>): Promise<Array<Array<Meteorology>>> {
-    const requestHandler = new RequestHandler(this.config, ApiAreas.meteorology);
-    return Promise.all(airports.map(airport => requestHandler.performRequest(airport, new MeteorologyProcessor())));
+  public getMeteorology(...airports: string[]): Promise<Meteorology[][]> {
+    const requestHandler = new MeteorologyRequest(this.config)
+    return Promise.all(airports.map((airport: string) => requestHandler.performRequest(airport)))
   }
 
 }
