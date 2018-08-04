@@ -4,7 +4,7 @@ import { AipSuplementRequest, ChartRequest, MeteorologyRequest, NotamRequest } f
 
 export default class Ais {
 
-  constructor(private config: IAisConfig) {}
+  constructor(private config: IAisConfig) { }
 
   public getCharts(...airports: string[]): Promise<Chart[][]> {
     const requestHandler = new ChartRequest(this.config)

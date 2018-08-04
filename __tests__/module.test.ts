@@ -2,13 +2,14 @@ import 'jest'
 import Ais from '../src'
 import { InvalidCredentialsError } from '../src/errors/invalid-credentials-error'
 import { AipSuplement, Chart, Meteorology, Notam } from '../src/factories'
+import { config } from '../config'
 
-const aisHandler = new Ais({ apiKey: '1934217367', apiPass: 'e9062beb-43f1-11e7-a4c1-00505680c1b4' })
+const aisHandler = new Ais(config)
 
 test('invalid credentials', (done) => {
   const aisHandlerIC = new Ais({ apiKey: '1934217368', apiPass: 'e9062beb-43f1-11e7-a4c1-00505680c1b4' })
   aisHandlerIC.getCharts('SBEG')
-    .catch(error => {
+    .catch((error) => {
       expect(error).toBeInstanceOf(InvalidCredentialsError)
       done()
     })
@@ -40,7 +41,7 @@ test('Get Notams from SBRF', (done) => {
 })
 
 // No notams
-test('Get Charts from SNEM', (done) => {
+test('Get Notams from SNEM', (done) => {
   aisHandler.getNotams('SNEM')
     .then((result: Notam[][]) => {
       expect(result[0].length).toBe(0)
