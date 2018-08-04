@@ -72,7 +72,7 @@ On the following example, we gonna retrieve AipSuplements from 2 airports.
   * @param {...airports} - ICAO code of each airport.
   * @return {Promise<AipSuplement[][]>} - An array of airports, each one containing an array of AipSuplements.
 */
-Ais.getNotams('SBEG', 'SBRF')
+Ais.getAipSuplement('SBEG', 'SBRF')
   .then((charts: AipSuplement[][]) => console.log(charts))
   .catch((error: Error) => console.error(error))
 ```
@@ -82,14 +82,14 @@ Please, refer to the [`AipSuplement`](https://github.com/jpedroh/aisweb-brasil/b
 Use method `getMeteorology` to retrieve Meteorology information from one or more airport. The method returns a promise, containing an array of the request airports, each one containing an array of Meteorology instances.
 
 ##### Example
-On the following example, we gonna retrieve Meteorologys from 2 airports.
+On the following example, we gonna retrieve Meteorology from 2 airports.
 ```typescript
 /**
   * Retrieves Meteorology from one or more airports.
   * @param {...airports} - ICAO code of each airport.
   * @return {Promise<Meteorology[][]>} - An array of airports, each one containing an array of Meteorology.
 */
-Ais.getNotams('SBEG', 'SBRF')
+Ais.getMeteorology('SBEG', 'SBRF')
   .then((charts: Meteorology[][]) => console.log(charts))
   .catch((error: Error) => console.error(error))
 ```
