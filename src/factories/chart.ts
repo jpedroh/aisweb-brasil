@@ -5,12 +5,12 @@ export class Chart {
   public date: Date
   public link: string
 
-  constructor({ id, type, name, date, link }: { id: string, type: string, name: string, date: Date, link: string }) {
-    this.id = id
-    this.type = type
-    this.name = name
-    this.date = date
-    this.link = link
+  constructor(data: Chart) {
+    this.id = data.id
+    this.type = data.type
+    this.name = data.name
+    this.date = data.date
+    this.link = data.link
   }
 
 }

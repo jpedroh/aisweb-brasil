@@ -1,7 +1,7 @@
 import 'jest'
 import Ais from '../src'
 import { InvalidCredentialsError } from '../src/errors/invalid-credentials-error'
-import { AipSuplement, Chart, Meteorology, Notam } from '../src/factories'
+import { AipSuplement, Chart, Meteorology, Notam, Rotaer } from '../src/factories'
 import { config } from '../config'
 
 const aisHandler = new Ais(config)
@@ -69,6 +69,23 @@ test('Get Met from SBRF', (done) => {
   aisHandler.getMeteorology('SBRF')
     .then((result: Meteorology[][]) => {
       expect(result[0][0]).toBeInstanceOf(Meteorology)
+      done()
+    })
+})
+
+test('Get Rotaer from SBRF', (done) => {
+  aisHandler.getRotaer('SBRF')
+    .then((result: Rotaer[][]) => {
+      expect(result[0][0]).toBeInstanceOf(Rotaer)
+      done()
+    })
+})
+
+// No Rotaer
+test('Get Rotaer from EGLL', (done) => {
+  aisHandler.getRotaer('EGLL')
+    .then((result: Rotaer[][]) => {
+      expect(result[0].length).toBe(0)
       done()
     })
 })

@@ -12,22 +12,19 @@ export class Notam {
   public geo: string
   public origem: string
 
-  constructor({ id, cod, status, tp, date, n, b, c, e, s, geo, origem }:
-              { id: string, cod: string, status: string, tp: string, date: Date,
-                n: string, b: string, c: string, e: string, s: string, geo: string,
-                origem: string }) {
-    this.id = parseInt(id, 10)
-    this.cod = cod
-    this.status = status
-    this.tp = tp
-    this.date = date
-    this.n = n
-    this.b = b
-    this.c = c
-    this.e = e
-    this.s = s
-    this.geo = geo
-    this.origem = origem
+  constructor(data: Notam) {
+    this.id = data.id
+    this.cod = data.cod
+    this.status = data.status
+    this.tp = data.tp
+    this.date = data.date
+    this.n = data.n
+    this.b = data.b
+    this.c = data.c
+    this.e = data.e
+    this.s = data.s
+    this.geo = data.geo
+    this.origem = data.origem
   }
 
 }

@@ -95,6 +95,23 @@ Ais.getMeteorology('SBEG', 'SBRF')
 ```
 Please, refer to the [`Meteorology`](https://github.com/jpedroh/aisweb-brasil/blob/master/src/factories/meteorology.ts) factory file, to be aware of each field.
 
+### Retrieving Airports Rotaer
+Use method `getRotaer` to retrieve Rotaer from one or more airports. The method returns a promise, containing an array of the request airports, each one containing an array with a single Rotaer instance - this is done to preserve the overall module structure.
+
+##### Example
+On the following example, we gonna retrieve Rotaer from 2 airports.
+```typescript
+/**
+  * Retrieves Rotaer from one or more airports.
+  * @param {...airports} - ICAO code of each airport.
+  * @return {Promise<Rotaer[][]>} - An array of airports, each one containing an array of Rotaer.
+*/
+Ais.getRotaer('SBEG', 'SBRF')
+  .then((charts: Rotaer[][]) => console.log(charts))
+  .catch((error: Error) => console.error(error))
+```
+Please, refer to the [`Rotaer`](https://github.com/jpedroh/aisweb-brasil/blob/master/src/factories/rotaer.ts) factory file, to be aware of each field.
+
 ## Error Handling
 There are two Errors classes on the module. 
 

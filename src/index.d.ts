@@ -29,11 +29,18 @@ declare module 'aisweb-brasil' {
     /**
      * Retrieves Metereology from one or more airports.
      * @param {...airports} - ICAO code of each airport.
-     * @return {Promise<Metereology[][]>} - An array of airports, each one containing an array of Metereologies.
+     * @return {Promise<Meteorology[][]>} - An array of airports, each one containing an array of Metereologies.
      */
     public getMeteorology(...airports: string[]): Promise<Meteorology[][]>
+
+    /**
+     * Retrieves Rotaer from one or more airports.
+     * @param {...airports} - ICAO code of each airport.
+     * @return {Promise<Rotaer[][]>} - An array of airports, each one containing an array of Metereologies.
+     */
+    public getRotaer(...airports: string[]): Promise<Rotaer[][]>
   }
-  
+
   /**
    * Interface containing the credentials to access AisWeb API.
    *
@@ -56,10 +63,7 @@ declare module 'aisweb-brasil' {
     public status: string
     public ref: string
   
-    constructor({ id, n, serie, local, date, title, text, duration, status, ref }:
-                { id: string, n: string, serie: string, local: string, date: Date, title: string,
-                  text: string, duration: string, status: string, ref: string })
-  
+    constructor(data: AipSuplement)
   }
 
   export class Chart {
@@ -69,16 +73,14 @@ declare module 'aisweb-brasil' {
     public date: Date
     public link: string
   
-    constructor({ id, type, name, date, link }: { id: string, type: string, name: string, date: Date, link: string })
-  
+    constructor(data: Chart)
   }
 
   export class Meteorology {
     public metar: string
     public taf: string
   
-    constructor({ metar, taf }: { metar: string, taf: string })
-  
+    constructor(data: Meteorology)
   }
   
   export class Notam {
@@ -95,12 +97,64 @@ declare module 'aisweb-brasil' {
     public geo: string
     public origem: string
   
-    constructor({ id, cod, status, tp, date, n, b, c, e, s, geo, origem }:
-                { id: string, cod: string, status: string, tp: string, date: Date,
-                  n: string, b: string, c: string, e: string, s: string, geo: string,
-                  origem: string })
-  
+    constructor(data: Notam)
   }
+  export class Rotaer {
+    public status: string
+    public name: string
+    public ciad: string
+    public city: string
+    public state: string
+    public lat: number
+    public lng: number
+    public latRotaer: string
+    public lngRotaer: string
+    public distance: string
+    public organization: IOrganization
+    public type: string
+    public typeUtil: string
+    public category: string
+    public UTC: number
+    public altitude: number
+    public fir: string
+    public jurisdiction: string
+    public lights: ILight[]
+    public remarks: IRemark[]
+    public runways: IRunway[]
+    public complements: IComplement[]
+  
+    constructor(data: Rotaer)
+  }
+  
+  export interface IOrganization {
+    name: string
+    type: string
+    military: string
+  }
+  
+  export interface IComplement {
+    code: string
+    complement: string
+  }
+  
+  export interface ILight {
+    code: string
+    description: string
+  }
+  
+  export interface IRunway {
+    type: string
+    ident: string
+    surface: string
+    length: number
+    width: number
+    lights: ILight[]
+  }
+  
+  export interface IRemark {
+    code: string
+    remark: string
+  }   
 
   export class InvalidCredentialsError extends Error {
     constructor(message?: string)  

@@ -1,6 +1,6 @@
 {
   "name": "aisweb-brasil",
-  "version": "1.1.0",
+  "version": "1.2.1",
   "description": "A module for fetching data from AisWeb",
   "main": "dist/index.js",
   "repository": "jpedroh/aisweb-brasil",

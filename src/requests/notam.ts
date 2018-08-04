@@ -17,7 +17,7 @@ export class NotamRequest extends ModelRequest {
     const notams: Notam[] = []
     result.notam[0].item.forEach((notam: any) => {
       return notams.push(new Notam({
-        id: notam.id[0],
+        id: parseInt(notam.id[0], 10),
         cod: notam.cod[0],
         status: notam.status[0],
         tp: notam.tp[0],

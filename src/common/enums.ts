@@ -3,4 +3,5 @@ export enum ApiAreas {
   notams = 'notam',
   aip = 'suplementos',
   meteorology = 'met',
+  rotaer = 'rotaer',
 }

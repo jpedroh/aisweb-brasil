@@ -10,19 +10,17 @@ export class AipSuplement {
   public status: string
   public ref: string
 
-  constructor({ id, n, serie, local, date, title, text, duration, status, ref }:
-              { id: string, n: string, serie: string, local: string, date: Date, title: string,
-                text: string, duration: string, status: string, ref: string }) {
-    this.id = id
-    this.n = n
-    this.serie = serie
-    this.local = local
-    this.date = date
-    this.title = title
-    this.text = text
-    this.duration = duration
-    this.status = status
-    this.ref = ref
+  constructor(data: AipSuplement) {
+    this.id = data.id
+    this.n = data.n
+    this.serie = data.serie
+    this.local = data.local
+    this.date = data.date
+    this.title = data.title
+    this.text = data.text
+    this.duration = data.duration
+    this.status = data.status
+    this.ref = data.ref
   }
 
 }

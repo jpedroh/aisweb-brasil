@@ -1,6 +1,6 @@
 import { IAisConfig } from './common/config'
-import { AipSuplement, Chart, Meteorology, Notam } from './factories'
-import { AipSuplementRequest, ChartRequest, MeteorologyRequest, NotamRequest } from './requests'
+import { AipSuplement, Chart, Meteorology, Notam, Rotaer } from './factories'
+import { AipSuplementRequest, ChartRequest, MeteorologyRequest, NotamRequest, RotaerRequest } from './requests'
 
 export default class Ais {
 
@@ -23,6 +23,11 @@ export default class Ais {
 
   public getMeteorology(...airports: string[]): Promise<Meteorology[][]> {
     const requestHandler = new MeteorologyRequest(this.config)
+    return Promise.all(airports.map((airport: string) => requestHandler.performRequest(airport)))
+  }
+
+  public getRotaer(...airports: string[]): Promise<Rotaer[][]> {
+    const requestHandler = new RotaerRequest(this.config)
     return Promise.all(airports.map((airport: string) => requestHandler.performRequest(airport)))
   }
 
