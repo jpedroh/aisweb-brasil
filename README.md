@@ -1,5 +1,5 @@
 # aisweb-brasil
-A lib for retrieving AisWeb API data on JSON format.
+A lib for retrieving AisWeb API data to JavaScript objects.
 
 ## Installation 
 ```sh
@@ -111,12 +111,13 @@ Ais.getRotaer('SBEG', 'SBRF')
   .catch((error: Error) => console.error(error))
 ```
 Please, refer to the [`Rotaer`](https://github.com/jpedroh/aisweb-brasil/blob/master/src/factories/rotaer.ts) factory file, to be aware of each field.
+NOTE: By now, services are still not available. Expect it to be released on the next updates.
 
 ## Error Handling
 There are two Errors classes on the module. 
 
-### Incorrect credentials
-In case you place incorrect credentials on the initialization, an instance of `InvalidCredentialsError` will be thrown in any of the methods allowed.
+### Invalid credentials
+In case you place invalid credentials on the initialization, an instance of `InvalidCredentialsError` will be thrown.
 
 ### Parse
-In case it's not possible to parse the XML response from AisWeb API, an instance of `ParseError` will be thrown in any of the methods allowed.
+In case it's not possible to parse the XML response from AisWeb API, an instance of `ParseError` will be thrown.

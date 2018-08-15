@@ -20,6 +20,7 @@ export class AipSuplementRequest extends ModelRequest {
         id: suplement.id[0],
         n: suplement.n[0],
         serie: suplement.serie[0],
+        type: suplement.tipo[0],
         local: suplement.local[0],
         date: convertDate(suplement.dt[0]),
         title: suplement.titulo[0],
@@ -27,6 +28,7 @@ export class AipSuplementRequest extends ModelRequest {
         duration: suplement.duracao[0],
         status: suplement.status[0],
         ref: suplement.ref[0],
+        anexo: suplement.anexo[0],
       }))
     })
     return suplements

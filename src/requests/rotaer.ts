@@ -2,7 +2,7 @@ import { IAisConfig } from '../common/config'
 import { ApiAreas } from '../common/enums'
 import { ModelRequest } from '../common/model-request'
 import { Rotaer } from '../factories'
-import { IComplement, ILight, IRemark, IRunway } from '../factories/rotaer'
+import { IComplement, ILight, IRemark, IRunway, IThreshold } from '../factories/rotaer'
 
 export class RotaerRequest extends ModelRequest {
 
@@ -15,6 +15,8 @@ export class RotaerRequest extends ModelRequest {
       return []
     }
     const rotaer = new Rotaer({
+      workinghour: result.workinghour[0],
+      AeroCode: result.AeroCode[0],
       altitude: parseInt(result.altFt[0], 10),
       category: result.cat[0],
       ciad: result.ciad[0],
@@ -76,5 +78,13 @@ function processRunways(runways: any[]): IRunway[] {
     surface: value.surface_c[0]._,
     type: value.type[0],
     width: parseInt(value.width[0]._, 10),
+    thresholds: processThresholds(runways[0].runway[0].thr)
+  }))
+}
+
+function processThresholds(thresholds: any[]): IThreshold[] {
+  return thresholds.map((value: any) => ({
+    ident: value.ident[0],
+    lights: processLights(value.lights),
   }))
 }

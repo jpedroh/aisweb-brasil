@@ -1,5 +1,6 @@
 export class Rotaer {
   public status: string
+  public AeroCode: string
   public name: string
   public ciad: string
   public city: string
@@ -21,9 +22,11 @@ export class Rotaer {
   public remarks: IRemark[]
   public runways: IRunway[]
   public complements: IComplement[]
+  public workinghour: string
 
   constructor(data: Rotaer) {
     this.status = data.status
+    this.AeroCode = data.AeroCode
     this.ciad = data.ciad
     this.name = data.name
     this.city = data.city
@@ -34,6 +37,7 @@ export class Rotaer {
     this.lngRotaer = data.lngRotaer
     this.distance = data.distance
     this.organization = data.organization
+    this.workinghour = data.workinghour
     this.type = data.type
     this.typeUtil = data.typeUtil
     this.category = data.category
@@ -42,8 +46,8 @@ export class Rotaer {
     this.fir = data.fir
     this.jurisdiction = data.jurisdiction
     this.lights = data.lights
-    this.remarks = data.remarks
     this.runways = data.runways
+    this.remarks = data.remarks
     this.complements = data.complements
   }
 
@@ -71,6 +75,12 @@ export interface IRunway {
   surface: string
   length: number
   width: number
+  lights: ILight[]
+  thresholds: IThreshold[]
+}
+
+export interface IThreshold {
+  ident: string
   lights: ILight[]
 }
 
