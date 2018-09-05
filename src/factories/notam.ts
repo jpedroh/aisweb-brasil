@@ -8,8 +8,8 @@ export class Notam {
   n: string
   ref: string
   loc: string
-  b: string
-  c: string
+  b: string | Date
+  c: string | Date
   d: string
   e: string
   f: string

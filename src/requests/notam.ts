@@ -26,8 +26,8 @@ export class NotamRequest extends ModelRequest {
         n: notam.n[0],
         ref: notam.ref[0],
         loc: notam.loc[0],
-        b: notam.b[0],
-        c: notam.c[0],
+        b: formatNotamDate(notam.b[0]),
+        c: formatNotamDate(notam.c[0]),
         d: notam.d[0],
         e: notam.e[0],
         f: notam.f[0],
@@ -44,4 +44,8 @@ export class NotamRequest extends ModelRequest {
     return notams
   }
 
+}
+
+function formatNotamDate (date: string): string | Date {
+  return date === 'PERM' ? date : new Date(Date.UTC(2000 + parseInt(date.substr(0, 2)), parseInt(date.substr(2, 2)), parseInt(date.substr(4, 2)), parseInt(date.substr(6, 2)), parseInt(date.substr(8, 2))))
 }

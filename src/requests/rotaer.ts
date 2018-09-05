@@ -50,41 +50,56 @@ export class RotaerRequest extends ModelRequest {
 }
 
 function processComplements(complements: any[]): IComplement[] {
-  return complements[0].compl.map((value: any) => ({
-    code: value.$.cod,
-    complement: value._,
-  }))
+  if(complements[0].compl) {
+    return complements[0].compl.map((value: any) => ({
+      code: value.$.cod,
+      complement: value._,
+    }))
+  }
+  return []
 }
 
 function processLights(lights: any[]): ILight[] {
-  return lights[0].light.map((value: any) => ({
-    code: value._,
-    description: value.$.descr
-  }))
+  if(lights[0].light) {
+    return lights[0].light.map((value: any) => ({
+      code: value._,
+      description: value.$.descr
+    }))
+  }
+  return []
 }
 
 function processRemarks(remakrs: any): IRemark[] {
-  return remakrs.rmkText.map((value: any) => ({
-    code: value.$.cod,
-    remark: value._,
-  }))
+  if(remakrs.rmkText) {
+    return remakrs.rmkText.map((value: any) => ({
+      code: value.$.cod,
+      remark: value._,
+    }))
+  }
+  return []
 }
 
 function processRunways(runways: any[]): IRunway[] {
-  return runways[0].runway.map((value: any) => ({
-    ident: value.ident[0],
-    length: parseInt(value.length[0]._, 10),
-    lights: processLights(value.lights),
-    surface: value.surface_c[0]._,
-    type: value.type[0],
-    width: parseInt(value.width[0]._, 10),
-    thresholds: processThresholds(runways[0].runway[0].thr)
-  }))
+  if(runways[0].runway) {
+    return runways[0].runway.map((value: any) => ({
+      ident: value.ident[0],
+      length: parseInt(value.length[0]._, 10),
+      lights: processLights(value.lights),
+      surface: value.surface_c[0]._,
+      type: value.type[0],
+      width: parseInt(value.width[0]._, 10),
+      thresholds: processThresholds(runways[0].runway[0].thr)
+    }))
+  }
+  return []
 }
 
 function processThresholds(thresholds: any[]): IThreshold[] {
-  return thresholds.map((value: any) => ({
-    ident: value.ident[0],
-    lights: processLights(value.lights),
-  }))
+  if(thresholds) {
+    return thresholds.map((value: any) => ({
+      ident: value.ident[0],
+      lights: processLights(value.lights),
+    }))
+  }
+  return []
 }
