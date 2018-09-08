@@ -1,26 +1,26 @@
 export class Notam {
-  id: string
-  cod: string
-  status: string
-  cat: string
-  tp: string
-  date: Date
-  n: string
-  ref: string
-  loc: string
-  b: string | Date
-  c: string | Date
-  d: string
-  e: string
-  f: string
-  g: string
-  nof: string
-  s: string
-  geo: string
-  airport: string
-  city: string
-  uf: string
-  origin: string
+  public id: string
+  public cod: string
+  public status: string
+  public cat: string
+  public tp: string
+  public date: Date
+  public n: string
+  public ref: string
+  public loc: string
+  public b: string | Date
+  public c: string | Date
+  public d: string
+  public e: string
+  public f: string
+  public g: string
+  public nof: string
+  public s: string
+  public geo: string
+  public airport: string
+  public city: string
+  public uf: string
+  public origin: string
 
   constructor(data: Notam) {
     this.id = data.id

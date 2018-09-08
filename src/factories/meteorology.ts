@@ -1,6 +1,6 @@
 export class Meteorology {
-  public metar: string
-  public taf: string
+  public metar: string | null
+  public taf: string | null
 
   constructor(data: Meteorology) {
     this.metar = data.metar

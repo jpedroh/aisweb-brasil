@@ -1,10 +1,10 @@
-import { IAisConfig } from './common/config'
+import { IAisCredentials } from './common/ais-credentials'
 import { AipSuplement, Chart, Meteorology, Notam, Rotaer } from './factories'
 import { AipSuplementRequest, ChartRequest, MeteorologyRequest, NotamRequest, RotaerRequest } from './requests'
 
 export default class Ais {
 
-  constructor(private config: IAisConfig) { }
+  constructor(private config: IAisCredentials) { }
 
   public getCharts(...airports: string[]): Promise<Chart[][]> {
     const requestHandler = new ChartRequest(this.config)

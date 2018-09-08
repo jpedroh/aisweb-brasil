@@ -80,4 +80,4 @@ typings/
 
 /node_modules
 /dist
-config.ts
+/__tests__/config.ts

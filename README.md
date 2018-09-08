@@ -119,5 +119,8 @@ There are two Errors classes on the module.
 ### Invalid credentials
 In case you place invalid credentials on the initialization, an instance of `InvalidCredentialsError` will be thrown.
 
+### Request Error
+In case the request to the AisWeb API returns an error, an instance of `RequestError` will be thrown. 
+
 ### Parse
 In case it's not possible to parse the XML response from AisWeb API, an instance of `ParseError` will be thrown.

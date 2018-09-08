@@ -1,12 +1,12 @@
-import { IAisConfig } from '../common/config'
-import { ApiAreas } from '../common/enums'
+import { IAisCredentials } from '../common/ais-credentials'
+import { ApiAreas } from '../common/api-areas'
 import { ModelRequest } from '../common/model-request'
 import { Rotaer } from '../factories'
 import { IComplement, ILight, IRemark, IRunway, IThreshold } from '../factories/rotaer'
 
-export class RotaerRequest extends ModelRequest {
+export class RotaerRequest extends ModelRequest<Rotaer> {
 
-  constructor(config: IAisConfig) {
+  constructor(config: IAisCredentials) {
     super(config, ApiAreas.rotaer)
   }
 
@@ -15,7 +15,6 @@ export class RotaerRequest extends ModelRequest {
       return []
     }
     const rotaer = new Rotaer({
-      workinghour: result.workinghour[0],
       AeroCode: result.AeroCode[0],
       altitude: parseInt(result.altFt[0], 10),
       category: result.cat[0],
@@ -37,12 +36,13 @@ export class RotaerRequest extends ModelRequest {
         type: result.org[0].type[0],
       },
       remarks: processRemarks(result.rmk[0]),
+      runways: processRunways(result.runways),
       state: result.uf[0],
       status: result.status[0],
       type: result.type[0],
       typeUtil: result.typeUtil[0],
       UTC: parseInt(result.utc[0], 10),
-      runways: processRunways(result.runways),
+      workinghour: result.workinghour[0],
     })
     return [rotaer]
   }
@@ -50,7 +50,7 @@ export class RotaerRequest extends ModelRequest {
 }
 
 function processComplements(complements: any[]): IComplement[] {
-  if(complements[0].compl) {
+  if (complements[0].compl) {
     return complements[0].compl.map((value: any) => ({
       code: value.$.cod,
       complement: value._,
@@ -60,17 +60,17 @@ function processComplements(complements: any[]): IComplement[] {
 }
 
 function processLights(lights: any[]): ILight[] {
-  if(lights[0].light) {
+  if (lights[0].light) {
     return lights[0].light.map((value: any) => ({
       code: value._,
-      description: value.$.descr
+      description: value.$.descr,
     }))
   }
   return []
 }
 
 function processRemarks(remakrs: any): IRemark[] {
-  if(remakrs.rmkText) {
+  if (remakrs.rmkText) {
     return remakrs.rmkText.map((value: any) => ({
       code: value.$.cod,
       remark: value._,
@@ -80,22 +80,22 @@ function processRemarks(remakrs: any): IRemark[] {
 }
 
 function processRunways(runways: any[]): IRunway[] {
-  if(runways[0].runway) {
+  if (runways[0].runway) {
     return runways[0].runway.map((value: any) => ({
       ident: value.ident[0],
       length: parseInt(value.length[0]._, 10),
       lights: processLights(value.lights),
       surface: value.surface_c[0]._,
+      thresholds: processThresholds(runways[0].runway[0].thr),
       type: value.type[0],
       width: parseInt(value.width[0]._, 10),
-      thresholds: processThresholds(runways[0].runway[0].thr)
     }))
   }
   return []
 }
 
 function processThresholds(thresholds: any[]): IThreshold[] {
-  if(thresholds) {
+  if (thresholds) {
     return thresholds.map((value: any) => ({
       ident: value.ident[0],
       lights: processLights(value.lights),

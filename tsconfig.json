@@ -8,8 +8,11 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
-    "**/*.test.ts",
-    "config.ts"
-]
+    "node_modules",
+    "**/*.test.ts"
+  ]
 }
