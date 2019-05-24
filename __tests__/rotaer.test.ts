@@ -1,7 +1,6 @@
 import 'jest'
 import { config } from '../config'
 import Ais from '../src'
-import { RequestError } from '../src/errors/request-error'
 import { Rotaer } from '../src/factories'
 
 const aisHandler = new Ais(config)
@@ -18,7 +17,7 @@ test('Get Rotaer from EGLL - has no Rotaer', (done) => {
     // Due to some reason, trying to retrieve Rotaers from some airports makes Ais API return a 500 Error.
     aisHandler.getRotaer('EGLL')
         .catch((error) => {
-            expect(error).toBeInstanceOf(RequestError)
+            expect(error).toBeInstanceOf(Error)
             done()
         })
 })

@@ -1,10 +1,9 @@
-import request from 'request'
 import { parseString } from 'xml2js'
 import { InvalidCredentialsError } from '../errors/invalid-credentials-error'
 import { ParseError } from '../errors/parse-error'
-import { RequestError } from '../errors/request-error'
 import { IAisCredentials } from './ais-credentials'
 import { ApiAreas } from './api-areas'
+import Axios from 'axios'
 
 export abstract class ModelRequest<Model> {
   protected requestUrl: string
@@ -23,18 +22,14 @@ export abstract class ModelRequest<Model> {
   protected abstract processRequest(data: string): Model[]
 
   private apiFetcher(airportIcao: string): Promise<string> {
-    return new Promise((res, rej) => {
-      request(`${this.requestUrl}&IcaoCode=${airportIcao}`, (error: any, response: any, body: any) => {
-        if (error || response.statusCode === 500) {
-          rej(new RequestError('Request failed'))
-        } else if (body.indexOf('Informe uma chave válida na URL') !== -1
-                  || body.indexOf('Erro nos parametros obrigatórios') !== -1) {
-          rej(new InvalidCredentialsError('Informed credentials are invalid'))
-        } else {
-          res(body)
+    return Axios.get(`${this.requestUrl}&IcaoCode=${airportIcao}`)
+      .then(response => {
+        if(response.data.includes('Informe uma chave válida na URL') ||
+          response.data.includes('Erro nos parametros obrigatórios')) {
+          throw new InvalidCredentialsError('Informed credentials are invalid')
         }
+        return response.data
       })
-    })
   }
 
   private xmlParse(data: string): any {
