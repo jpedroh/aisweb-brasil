@@ -1,6 +1,6 @@
 {
   "name": "aisweb-brasil",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A lib for retrieving AisWeb API data to JavaScript objects",
   "main": "dist/index.js",
   "repository": "jpedroh/aisweb-brasil",
@@ -11,7 +11,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": ">=0.19.0",
     "xml2js": "^0.4.19"
   },
   "devDependencies": {
