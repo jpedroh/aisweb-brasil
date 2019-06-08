@@ -1,6 +1,6 @@
 {
   "name": "aisweb-brasil",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "A lib for retrieving AisWeb API data to JavaScript objects",
   "main": "dist/index.js",
   "repository": "jpedroh/aisweb-brasil",
@@ -18,9 +18,9 @@
     "@types/jest": "^23.1.6",
     "@types/node": "^10.5.2",
     "@types/xml2js": "^0.4.3",
-    "jest": "^23.4.1",
-    "jest-cli": "^23.4.1",
-    "ts-jest": "^23.0.0",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "ts-jest": "^24.0.2",
     "typescript": "^2.9.2"
   },
   "jest": {
